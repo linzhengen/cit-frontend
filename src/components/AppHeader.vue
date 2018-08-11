@@ -1,28 +1,32 @@
 <template>
-  <nav class="navbar is-transparent is-fixed-top">
-    <div class="navbar-brand">
-      <a
-        class="navbar-item"
-        href="/">
-        Amen Life
-      </a>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a
+          class="navbar-item"
+          href="/">
+          Amen Life
+        </a>
+        <span
+          :class="{ 'is-active': menuBurger }"
+          class="navbar-burger burger"
+          @click="toggleBurger(!menuBurger)">
+          <span/>
+          <span/>
+          <span/>
+        </span>
+      </div>
       <div
         :class="{ 'is-active': menuBurger }"
-        class="navbar-burger burger"
-        @click="toggleBurger(!menuBurger)">
-        <span/>
-        <span/>
-        <span/>
-      </div>
-    </div>
-    <div
-      :class="{ 'is-active': menuBurger }"
-      class="navbar-menu">
-      <div class="navbar-item">
-        登録
-      </div>
-      <div class="navbar-item">
-        一覧
+        class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            登録
+          </a>
+          <a class="navbar-item">
+            一覧
+          </a>
+        </div>
       </div>
     </div>
   </nav>
