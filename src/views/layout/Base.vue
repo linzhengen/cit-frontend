@@ -1,28 +1,24 @@
 <template>
   <div>
-    <app-header v-if="showHeader"/>
+    <app-header/>
     <transition>
-      <router-view></router-view>
+      <router-view/>
     </transition>
-    <app-footer v-if="showFooter"/>
+    <app-footer/>
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader'
-import AppFooter from '@/components/AppFooter'
-import { mapState } from 'vuex'
+  import AppHeader from '@/components/AppHeader'
+  import AppFooter from '@/components/AppFooter'
 
-export default {
-  name: 'LayoutBase',
-  components: {
-    AppHeader,
-    AppFooter
-  },
-  computed: {
-    ...mapState(['showHeader', 'showFooter'])
+  export default {
+    name: 'LayoutBase',
+    components: {
+      AppHeader,
+      AppFooter
+    },
   }
-}
 </script>
 
 <style lang="scss" scoped>

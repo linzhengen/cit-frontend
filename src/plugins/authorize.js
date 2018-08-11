@@ -14,7 +14,7 @@ export default Vue => {
         // authorized
         if (valid) return next()
         // unauthorized
-        next({ name: 'LoginForm', query: { redirect: to.fullPath } })
+        next({name: 'LoginForm', query: {redirect: to.fullPath}})
       })
   })
 }

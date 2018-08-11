@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service lint --ext .js,.vue --fix",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -44,10 +45,9 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/recommended",
       "eslint:recommended"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
     }

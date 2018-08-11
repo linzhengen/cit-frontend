@@ -7,8 +7,7 @@ Vue.use(Vuex)
 /* eslint-disable no-new */
 const store = new Vuex.Store({
   plugins: [createPersistedState()],
-  modules: {
-  }
+  modules: {}
 })
 
 export default store

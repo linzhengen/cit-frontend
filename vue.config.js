@@ -22,5 +22,7 @@ module.exports = {
     //       BASE_URL: '"/"'
     //     }
     //   }])
-  }
+  },
+
+  lintOnSave: false
 }

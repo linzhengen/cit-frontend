@@ -10,7 +10,7 @@ const instance = axios.create({
 
 // Response interceptor
 instance.interceptors.response.use(response => response, error => {
-  const { status } = error.response
+  const {status} = error.response
   if (status === 500) {
     // error handling
   }
