@@ -1,13 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+
+import state from '@/store/state'
+import * as getters from '@/store/getters'
+import * as mutations from '@/store/mutations'
+import * as actions from '@/store/actions'
+import * as modules from '@/store/modules'
 
 Vue.use(Vuex)
 
-/* eslint-disable no-new */
-const store = new Vuex.Store({
-  plugins: [createPersistedState()],
-  modules: {}
-})
+const strict = process.env.NODE_ENV !== 'production'
+
+const plugins = []
+
+const store = new Vuex.Store({state, getters, mutations, actions, modules, strict, plugins})
 
 export default store

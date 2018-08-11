@@ -10,7 +10,7 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>
-          Copyright ©CIT All Rights Reserved.
+          Copyright ©Amen Life Rights Reserved.
         </p>
       </div>
     </div>
@@ -38,7 +38,7 @@
     z-index: 999; /* Make sure it does not overlap */
     border: none; /* Remove borders */
     outline: none; /* Remove outline */
-    background-color: red; /* Set a background color */
+    background-color: rgba(2, 4, 2, 0.94); /* Set a background color */
     color: white; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
     padding: 10px; /* Some padding */
