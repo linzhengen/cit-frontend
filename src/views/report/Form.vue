@@ -9,49 +9,55 @@
           <div
             v-for="item in form_items"
             :key="item.item_code"
-            class="field">
-            <label class="label">{{ item.name }}</label>
-            <p
-              v-if="item.element_type === 'text'"
-              class="control">
-              <el-input
-                v-model="form[item.item_code]"
-                :placeholder="item.name"
-                type="text"
-                class="form-item"/>
-            </p>
-            <p
-              v-else-if="item.element_type === 'datetime'"
-              class="control">
-              <el-date-picker
-                v-model="form[item.item_code]"
-                :placeholder="item.name"
-                type="datetime"
-                class="form-item"/>
-            </p>
-            <p
-              v-else-if="item.element_type === 'number'"
-              class="control">
-              <el-input-number
-                v-model="form[item.item_code]"
-                :min="0"
-                :placeholder="item.name"
-                class="form-item"/>
-            </p>
-            <p
-              v-else-if="item.element_type === 'select'"
-              class="control">
-              <el-select
-                v-model="form[item.item_code]"
-                :placeholder="item.name"
-                class="form-item">
-                <el-option
-                  v-for="option in item.options"
-                  :key="option.type_id"
-                  :label="option.name"
-                  :value="option.type_id"/>
-              </el-select>
-            </p>
+            class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">{{ item.name }}</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div
+                  v-if="item.element_type === 'text'"
+                  class="control">
+                  <el-input
+                    v-model="form[item.item_code]"
+                    :placeholder="item.name"
+                    type="text"
+                    class="form-item"/>
+                </div>
+                <div
+                  v-else-if="item.element_type === 'datetime'"
+                  class="control">
+                  <el-date-picker
+                    v-model="form[item.item_code]"
+                    :placeholder="item.name"
+                    type="datetime"
+                    class="form-item"/>
+                </div>
+                <div
+                  v-else-if="item.element_type === 'number'"
+                  class="control">
+                  <el-input-number
+                    v-model="form[item.item_code]"
+                    :min="0"
+                    :placeholder="item.name"
+                    class="form-item"/>
+                </div>
+                <div
+                  v-else-if="item.element_type === 'select'"
+                  class="control">
+                  <el-select
+                    v-model="form[item.item_code]"
+                    :placeholder="item.name"
+                    class="form-item">
+                    <el-option
+                      v-for="option in item.options"
+                      :key="option.type_id"
+                      :label="option.name"
+                      :value="option.type_id"/>
+                  </el-select>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -155,7 +161,7 @@
     max-width: 700px;
   }
   .form-item {
-    min-width: 300px;
-    max-width: 500px;
+    min-width: 340px;
+    max-width: 400px;
   }
 </style>
