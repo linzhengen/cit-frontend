@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  publish-github-release:
+  build:
     docker:
       - image: cibuilds/github:0.10
     working_directory: ~/cit-frontend
