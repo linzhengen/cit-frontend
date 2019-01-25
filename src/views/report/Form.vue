@@ -31,6 +31,7 @@
                     v-model="form[item.item_code]"
                     :placeholder="item.name"
                     type="datetime"
+                    editable="false"
                     class="form-item"/>
                 </div>
                 <div
@@ -56,6 +57,15 @@
                       :value="option.type_id"/>
                   </el-select>
                 </div>
+                <div
+                  v-else-if="item.element_type === 'autocomplete'"
+                  class="control">
+                  <el-autocomplete
+                    v-model="form[item.item_code]"
+                    :fetch-suggestions="querySearch"
+                    placeholder="请输入内容"
+                    class="inline-input form-item"/>
+                </div>
               </div>
             </div>
           </div>
@@ -71,6 +81,43 @@
     data() {
       return {
         form: {},
+        places: {
+          1: [
+            '浦田',
+            '中華街',
+            '中板橋',
+            '龜戶',
+            '西日暮里',
+            '橫濱週三',
+            '橫濱週六',
+            '大森海岸',
+            '鶴見',
+            '東大前',
+            '田原町',
+            '早稻阿佐',
+            '代代木週五',
+          ],
+          2: [
+            '東京上午區',
+            '東京下午區',
+            '第三大區',
+            '橫濱區',
+            '第六大區',
+            '第七大區',
+            '事奉聚會',
+            '禱告聚會',
+            '青年在職',
+            '兒童活力',
+            '相調聚會',
+          ],
+          3: [
+            '成全訓練',
+            '真理追求',
+          ],
+          4: [
+            '特別聚會',
+          ],
+        },
         form_items: [
           {
             element_type: 'select',
@@ -80,8 +127,8 @@
             options: [
               {type_id: 1, name: '小排'},
               {type_id: 2, name: '一般聚會'},
-              {type_id: 3, name: '特別聚會'},
-              {type_id: 4, name: '真理成全'},
+              {type_id: 3, name: '真理成全'},
+              {type_id: 4, name: '特別聚會'},
             ]
           },
           {
@@ -91,7 +138,7 @@
             required: true,
           },
           {
-            element_type: 'text',
+            element_type: 'autocomplete',
             item_code: 'place',
             name: '地點',
             required: true,
