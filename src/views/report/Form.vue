@@ -7,54 +7,71 @@
       <div class="columns">
         <div class="column form-column">
           <div
-            v-for="item in form_items"
-            :key="item.item_code"
+            v-for="item in reportForm"
+            :key="item.name"
             class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">{{ item.name }}</label>
+              <label class="label">{{ item.label }}</label>
             </div>
             <div class="field-body">
               <div class="field is-narrow">
                 <div
-                  v-if="item.element_type === 'text'"
+                  v-if="item.type === 'text'"
                   class="control">
                   <el-input
-                    v-model="form[item.item_code]"
-                    :placeholder="item.name"
+                    v-model="form[item.name]"
+                    :placeholder="item.label"
                     type="text"
                     class="form-item"/>
                 </div>
                 <div
-                  v-else-if="item.element_type === 'datetime'"
+                  v-else-if="item.type === 'datetime'"
                   class="control">
                   <el-date-picker
-                    v-model="form[item.item_code]"
-                    :placeholder="item.name"
+                    v-model="form[item.name]"
+                    :placeholder="item.label"
+                    :editable="false"
                     type="datetime"
                     class="form-item"/>
                 </div>
                 <div
-                  v-else-if="item.element_type === 'number'"
+                  v-else-if="item.type === 'number'"
                   class="control">
                   <el-input-number
-                    v-model="form[item.item_code]"
+                    v-model="form[item.name]"
                     :min="0"
-                    :placeholder="item.name"
-                    class="form-item"/>
+                    :placeholder="item.label"
+                    class="form-item"
+                    @change="summaryReport"/>
                 </div>
                 <div
-                  v-else-if="item.element_type === 'select'"
+                  v-else-if="item.type === 'select'"
                   class="control">
                   <el-select
-                    v-model="form[item.item_code]"
-                    :placeholder="item.name"
-                    class="form-item">
+                    v-model="form[item.name]"
+                    :placeholder="item.label"
+                    class="form-item"
+                    @change="selectChange(item.name)">
                     <el-option
                       v-for="option in item.options"
-                      :key="option.type_id"
-                      :label="option.name"
-                      :value="option.type_id"/>
+                      :key="option.key"
+                      :label="option.label"
+                      :value="option.key"/>
                   </el-select>
+                </div>
+                <div
+                  v-else-if="item.type === 'placeAutoComplete'"
+                  class="control">
+                  <el-autocomplete
+                    v-model="form[item.name]"
+                    :placeholder="item.label"
+                    :fetch-suggestions="querySearch"
+                    class="form-item"
+                    @select="handleAutocomplete">
+                    <template slot-scope="{ item }">
+                      <div class="name">{{ item.name }}</div>
+                    </template>
+                  </el-autocomplete>
                 </div>
               </div>
             </div>
@@ -66,93 +83,49 @@
 </template>
 
 <script>
+  import places from "@/data/places";
+  import reportForm from "@/data/reportForm"
+
   export default {
     name: 'ReportForm',
     data() {
       return {
         form: {},
-        form_items: [
-          {
-            element_type: 'select',
-            item_code: 'type',
-            name: '聚會類別',
-            required: true,
-            options: [
-              {type_id: 1, name: '小排'},
-              {type_id: 2, name: '一般聚會'},
-              {type_id: 3, name: '特別聚會'},
-              {type_id: 4, name: '真理成全'},
-            ]
-          },
-          {
-            element_type: 'text',
-            item_code: 'title',
-            name: '標題',
-            required: true,
-          },
-          {
-            element_type: 'text',
-            item_code: 'place',
-            name: '地點',
-            required: true,
-          },
-          {
-            element_type: 'datetime',
-            item_code: 'time',
-            name: '時間',
-            required: true,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_1',
-            name: '弟兄',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_2',
-            name: '姊妹',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_3',
-            name: '受浸',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_4',
-            name: '新人',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_5',
-            name: '朋友',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_6',
-            name: '兒童',
-            required: false,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_summary',
-            name: '合計',
-            required: true,
-          },
-          {
-            element_type: 'number',
-            item_code: 'report_item_speak',
-            name: '申言',
-            required: false,
-          },
-        ]
+        places: places,
+        placeSelect: [],
+        reportForm: reportForm,
       }
     },
+    methods: {
+      selectChange(name) {
+        if (name === 'type') {
+          this.placeSelect = this.places[this.form[name]];
+          delete this.form['place'];
+        }
+      },
+      querySearch(queryString, cb) {
+        let placeSelect = this.placeSelect;
+        let results = queryString ? placeSelect.filter(this.createFilter(queryString)) : placeSelect;
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (placeSelect) => {
+          return (placeSelect.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleAutocomplete(item) {
+        this.form['place'] = item.name;
+      },
+      summaryReport() {
+        this.form['report_item_summary'] =
+            (this.form['report_item_1'] || 0)
+          + (this.form['report_item_2'] || 0)
+          + (this.form['report_item_3'] || 0)
+          + (this.form['report_item_4'] || 0)
+          + (this.form['report_item_5'] || 0)
+          + (this.form['report_item_6'] || 0);
+      },
+    }
   }
 </script>
 
@@ -160,6 +133,7 @@
   .form-column {
     max-width: 700px;
   }
+
   .form-item {
     min-width: 340px;
     max-width: 400px;
