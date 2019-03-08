@@ -18,16 +18,16 @@
 </template>
 
 <script>
-  import jump from 'jump.js'
+import jump from 'jump.js';
 
-  export default {
-    name: 'AppFooter',
-    methods: {
-      jumpTop () {
-        jump('html')
-      }
-    }
-  }
+export default {
+  name: 'AppFooter',
+  methods: {
+    jumpTop() {
+      jump('html');
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

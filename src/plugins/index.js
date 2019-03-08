@@ -1,9 +1,7 @@
-import nprogress from '@/plugins/nprogress'
-import authorize from '@/plugins/authorize'
+import nprogress from '@/plugins/nprogress';
 
 export default {
-  install (Vue) {
-    nprogress(Vue)
-    authorize(Vue)
-  }
-}
+  install(Vue) {
+    nprogress(Vue);
+  },
+};

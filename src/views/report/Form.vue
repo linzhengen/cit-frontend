@@ -83,50 +83,51 @@
 </template>
 
 <script>
-  import places from "@/data/places";
-  import reportForm from "@/data/reportForm"
+import places from '@/data/places';
+import reportForm from '@/data/reportForm';
 
-  export default {
-    name: 'ReportForm',
-    data() {
-      return {
-        form: {},
-        places: places,
-        placeSelect: [],
-        reportForm: reportForm,
+export default {
+  name: 'ReportForm',
+  data() {
+    return {
+      form: {},
+      places,
+      placeSelect: [],
+      reportForm,
+    };
+  },
+  methods: {
+    selectChange(name) {
+      if (name === 'type') {
+        this.placeSelect = this.places[this.form[name]];
+        delete this.form.place;
       }
     },
-    methods: {
-      selectChange(name) {
-        if (name === 'type') {
-          this.placeSelect = this.places[this.form[name]];
-          delete this.form['place'];
-        }
-      },
-      querySearch(queryString, cb) {
-        let placeSelect = this.placeSelect;
-        let results = queryString ? placeSelect.filter(this.createFilter(queryString)) : placeSelect;
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (placeSelect) => {
-          return (placeSelect.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleAutocomplete(item) {
-        this.form['place'] = item.name;
-      },
-      summaryReport() {
-        this.form['report_item_summary'] =
-            (this.form['report_item_1'] || 0)
-          + (this.form['report_item_2'] || 0)
-          + (this.form['report_item_3'] || 0)
-          + (this.form['report_item_4'] || 0)
-          + (this.form['report_item_5'] || 0)
-          + (this.form['report_item_6'] || 0);
-      },
-    }
-  }
+    querySearch(queryString, cb) {
+      const { placeSelect } = this;
+      const results = queryString ? placeSelect.filter(
+        this.createFilter(queryString),
+      ) : placeSelect;
+      cb(results);
+    },
+    createFilter(queryString) {
+      return placeSelect => (
+        placeSelect.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+      );
+    },
+    handleAutocomplete(item) {
+      this.form.place = item.name;
+    },
+    summaryReport() {
+      this.form.report_item_summary = (this.form.report_item_1 || 0)
+          + (this.form.report_item_2 || 0)
+          + (this.form.report_item_3 || 0)
+          + (this.form.report_item_4 || 0)
+          + (this.form.report_item_5 || 0)
+          + (this.form.report_item_6 || 0);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
