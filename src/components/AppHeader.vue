@@ -33,22 +33,22 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
 
-  export default {
-    name: 'AppHeader',
-    data () {
-      return {}
-    },
-    computed: {
-      ...mapGetters([
-        'menuBurger'
-      ])
-    },
-    methods: {
-      ...mapActions([
-        'toggleBurger'
-      ]),
-    }
-  }
+export default {
+  name: 'AppHeader',
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters([
+      'menuBurger',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'toggleBurger',
+    ]),
+  },
+};
 </script>

@@ -9,7 +9,7 @@ export default [
       { key: 2, label: '一般聚會' },
       { key: 3, label: '真理成全' },
       { key: 4, label: '特別聚會' },
-    ]
+    ],
   },
   {
     type: 'text',
@@ -77,4 +77,4 @@ export default [
     label: '申言',
     required: false,
   },
-]
+];

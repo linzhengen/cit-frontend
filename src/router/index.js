@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import LayoutBase from '@/views/layout/Base'
-import NotFound from '@/views/error/404'
-import MainRoutes from '@/router/main-routes'
+import Vue from 'vue';
+import Router from 'vue-router';
+import LayoutBase from '@/views/layout/Base';
+import NotFound from '@/views/error/404';
+import MainRoutes from '@/router/main-routes';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -12,12 +12,12 @@ export default new Router({
       path: '/',
       name: 'Root',
       component: LayoutBase,
-      children: MainRoutes
+      children: MainRoutes,
     },
     {
       path: '*',
       name: '404',
-      component: NotFound
-    }
-  ]
-})
+      component: NotFound,
+    },
+  ],
+});
