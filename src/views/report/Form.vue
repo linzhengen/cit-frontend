@@ -5,7 +5,7 @@
       <h1 class="title">集会人数登録</h1>
       <hr>
       <div class="columns">
-        <div class="column form-column">
+        <div class="column">
           <div
             v-for="item in reportForm"
             :key="item.name"
@@ -18,60 +18,80 @@
                 <div
                   v-if="item.type === 'text'"
                   class="control">
-                  <el-input
-                    v-model="form[item.name]"
-                    :placeholder="item.label"
+                  <input
                     type="text"
-                    class="form-item"/>
+                    class="input"
+                    v-model="form[item.name]"
+                    :name="item.name"
+                    :placeholder="item.label"
+                  />
                 </div>
                 <div
                   v-else-if="item.type === 'datetime'"
                   class="control">
-                  <el-date-picker
+                  <input
+                    type="date"
+                    class="input"
                     v-model="form[item.name]"
+                    :name="item.name"
                     :placeholder="item.label"
-                    :editable="false"
-                    type="datetime"
-                    class="form-item"/>
+                  />
                 </div>
                 <div
                   v-else-if="item.type === 'number'"
                   class="control">
-                  <el-input-number
-                    v-model="form[item.name]"
+                  <input
+                    type="number"
+                    class="input"
+                    v-model.number="form[item.name]"
+                    :name="item.name"
                     :min="0"
                     :placeholder="item.label"
-                    class="form-item"
                     @change="summaryReport"/>
                 </div>
                 <div
                   v-else-if="item.type === 'select'"
                   class="control">
-                  <el-select
-                    v-model="form[item.name]"
-                    :placeholder="item.label"
-                    class="form-item"
-                    @change="selectChange(item.name)">
-                    <el-option
-                      v-for="option in item.options"
-                      :key="option.key"
-                      :label="option.label"
-                      :value="option.key"/>
-                  </el-select>
+                  <div class="select is-fullwidth">
+                    <select
+                      v-model="form[item.name]"
+                      :name="item.name"
+                      @change="selectChange(item.name)">
+                      <option disabled value="">請選擇</option>
+                      <template v-if="item.name === 'place'">
+                        <option
+                          v-for="option in placeSelect"
+                          :key="option.key"
+                          :value="option.key">
+                          {{ option.label }}
+                        </option>
+                      </template>
+                      <template else>
+                        <option
+                          v-for="option in item.options"
+                          :key="option.key"
+                          :value="option.key">
+                          {{ option.label }}
+                        </option>
+                      </template>
+                    </select>
+                  </div>
                 </div>
-                <div
-                  v-else-if="item.type === 'placeAutoComplete'"
-                  class="control">
-                  <el-autocomplete
-                    v-model="form[item.name]"
-                    :placeholder="item.label"
-                    :fetch-suggestions="querySearch"
-                    class="form-item"
-                    @select="handleAutocomplete">
-                    <template slot-scope="{ item }">
-                      <div class="name">{{ item.name }}</div>
-                    </template>
-                  </el-autocomplete>
+                <p class="help is-danger" v-show="errors.has(item.name)">
+                  {{ errors.first(item.name) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label">
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <button class="button is-primary">
+                    保存
+                  </button>
                 </div>
               </div>
             </div>
@@ -90,9 +110,12 @@ export default {
   name: 'ReportForm',
   data() {
     return {
-      form: {},
-      places,
+      form: {
+        type: '',
+        place: '',
+      },
       placeSelect: [],
+      places,
       reportForm,
     };
   },
@@ -100,43 +123,17 @@ export default {
     selectChange(name) {
       if (name === 'type') {
         this.placeSelect = this.places[this.form[name]];
-        delete this.form.place;
+        this.form.place = '';
       }
     },
-    querySearch(queryString, cb) {
-      const { placeSelect } = this;
-      const results = queryString ? placeSelect.filter(
-        this.createFilter(queryString),
-      ) : placeSelect;
-      cb(results);
-    },
-    createFilter(queryString) {
-      return placeSelect => (
-        placeSelect.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-      );
-    },
-    handleAutocomplete(item) {
-      this.form.place = item.name;
-    },
     summaryReport() {
-      this.form.report_item_summary = (this.form.report_item_1 || 0)
-          + (this.form.report_item_2 || 0)
-          + (this.form.report_item_3 || 0)
-          + (this.form.report_item_4 || 0)
-          + (this.form.report_item_5 || 0)
-          + (this.form.report_item_6 || 0);
+      this.form.summary = (this.form.brother || 0)
+          + (this.form.sister || 0)
+          + (this.form.baptism || 0)
+          + (this.form.newer || 0)
+          + (this.form.friend || 0)
+          + (this.form.child || 0);
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-  .form-column {
-    max-width: 700px;
-  }
-
-  .form-item {
-    min-width: 340px;
-    max-width: 400px;
-  }
-</style>
