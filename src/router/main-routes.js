@@ -3,13 +3,13 @@ import ReportList from '@/views/report/List';
 
 export default [
   {
-    name: 'ReportForm',
     path: 'report/form',
+    name: 'ReportForm',
     component: ReportForm,
   },
   {
+    path: '',
     name: 'ReportList',
-    path: 'report/list',
     component: ReportList,
   },
 ];

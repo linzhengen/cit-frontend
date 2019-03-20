@@ -20,12 +20,8 @@
         :class="{ 'is-active': menuBurger }"
         class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
-            登録
-          </a>
-          <a class="navbar-item">
-            一覧
-          </a>
+          <router-link class="navbar-item" :to="{ name: 'ReportForm' }">登録</router-link>
+          <router-link class="navbar-item" :to="{ name: 'ReportList' }">一覧</router-link>
         </div>
       </div>
     </div>

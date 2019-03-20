@@ -30,7 +30,7 @@
                   v-else-if="item.type === 'datetime'"
                   class="control">
                   <input
-                    type="date"
+                    type="datetime-local"
                     class="input"
                     v-model="form[item.name]"
                     :name="item.name"
