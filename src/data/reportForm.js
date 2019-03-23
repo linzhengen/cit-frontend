@@ -25,7 +25,13 @@ export default [
     options: [],
   },
   {
-    type: 'datetime',
+    type: 'date',
+    name: 'date',
+    label: '日期',
+    required: true,
+  },
+  {
+    type: 'time',
     name: 'time',
     label: '時間',
     required: true,

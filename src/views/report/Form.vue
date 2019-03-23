@@ -27,10 +27,21 @@
                   />
                 </div>
                 <div
-                  v-else-if="item.type === 'datetime'"
+                  v-else-if="item.type === 'date'"
                   class="control">
                   <input
-                    type="datetime-local"
+                    type="date"
+                    class="input"
+                    v-model="form[item.name]"
+                    :name="item.name"
+                    :placeholder="item.label"
+                  />
+                </div>
+                <div
+                  v-else-if="item.type === 'time'"
+                  class="control">
+                  <input
+                    type="time"
                     class="input"
                     v-model="form[item.name]"
                     :name="item.name"
