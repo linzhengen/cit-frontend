@@ -5,7 +5,8 @@ import router from '@/router';
 import store from '@/store/index';
 import { sync } from 'vuex-router-sync';
 import plugins from '@/plugins';
-import VeeValidate from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
+import zhTW from 'vee-validate/dist/locale/zh_TW';
 import VueGoodTablePlugin from 'vue-good-table';
 
 import 'font-awesome/scss/font-awesome.scss';
@@ -19,6 +20,7 @@ Vue.use(plugins);
 Vue.use(VeeValidate);
 Vue.use(VueGoodTablePlugin);
 
+Validator.localize('zh-TW', zhTW);
 sync(store, router, { moduleName: 'route' });
 
 new Vue({
