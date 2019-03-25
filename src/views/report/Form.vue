@@ -11,7 +11,10 @@
             :key="item.name"
             class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">{{ item.label }}</label>
+              <label class="label">
+                {{ item.label }}
+                <span class="has-text-danger" v-if="item.validate.includes('required')">※</span>
+              </label>
             </div>
             <div class="field-body">
               <div class="field is-narrow">
@@ -160,7 +163,7 @@ export default {
     async handleSave() {
       await this.$validator.validateAll();
       if (this.errors.any()) {
-        VueScrollTo.scrollTo(`[name=${this.errors.items[0].field}]`, 300);
+        VueScrollTo.scrollTo(`[name=${this.errors.items[0].field}]`, 700);
       }
     },
   },
