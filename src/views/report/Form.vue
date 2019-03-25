@@ -20,9 +20,9 @@
                   class="control">
                   <input
                     type="text"
-                    class="input"
                     v-validate="item.validate"
                     v-model="form[item.name]"
+                    :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     :data-vv-as="item.label"
                     :name="item.name"
                     :placeholder="item.label"
@@ -33,9 +33,9 @@
                   class="control">
                   <input
                     type="date"
-                    class="input"
                     v-validate="item.validate"
                     v-model="form[item.name]"
+                    :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     :data-vv-as="item.label"
                     :name="item.name"
                     :placeholder="item.label"
@@ -46,9 +46,9 @@
                   class="control">
                   <input
                     type="time"
-                    class="input"
                     v-validate="item.validate"
                     v-model="form[item.name]"
+                    :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     :data-vv-as="item.label"
                     :name="item.name"
                     :placeholder="item.label"
@@ -59,7 +59,7 @@
                   class="control">
                   <input
                     type="number"
-                    class="input"
+                    :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     v-validate="item.validate"
                     v-model.number="form[item.name]"
                     :data-vv-as="item.label"
@@ -70,7 +70,9 @@
                 <div
                   v-else-if="item.type === 'select'"
                   class="control">
-                  <div class="select is-fullwidth">
+                  <div
+                    :class="[{'is-danger': errors.has(item.name)}, 'select', 'is-fullwidth']"
+                    >
                     <select
                       v-validate="item.validate"
                       v-model="form[item.name]"
