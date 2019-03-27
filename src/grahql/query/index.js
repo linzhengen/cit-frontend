@@ -10,7 +10,7 @@ export const ReportListQuery = gql`
   fragment report on Report {
     id
     type
-    name
+    title
     place
     dateTime
     summary

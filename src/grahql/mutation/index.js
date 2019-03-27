@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 export const createReportMutation = gql`
   mutation (
     $type: Int!
-    $name: String
+    $title: String
     $place: String!
     $dateTime: DateTime!
     $summary: Int!
@@ -12,7 +12,7 @@ export const createReportMutation = gql`
   ) {
     createReport(data: {
       type: $type
-      name: $name
+      title: $title
       place: $place
       dateTime: $dateTime
       summary: $summary
