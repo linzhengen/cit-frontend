@@ -131,11 +131,12 @@
 import places from '@/data/places';
 import reportForm from '@/data/reportForm';
 import VueScrollTo from 'vue-scrollto';
-import { createReportMutation } from '@/grahql/mutation'
+import { createReportMutation } from '@/grahql/mutation';
 import moment from 'moment';
 
 export default {
   name: 'ReportForm',
+  apollo: {},
   data() {
     return {
       form: {
@@ -174,6 +175,7 @@ export default {
         VueScrollTo.scrollTo(`[name=${this.errors.items[0].field}]`, 700);
         return;
       }
+      console.log(this.form);
       await this.$apollo.mutate({
         // Query
         mutation: createReportMutation,
@@ -183,8 +185,8 @@ export default {
           title: this.form.title,
           place: this.form.place,
           dateTime: moment(`${this.form.date} ${this.form.time}`, 'YYYY/MM/DD HH:MM').toDate(),
-          summary: this.summary,
-          detail: this.form,
+          summary: this.form.summary,
+          detail: JSON.stringify(this.form),
         },
       });
     },
