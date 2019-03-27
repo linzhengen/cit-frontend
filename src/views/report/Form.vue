@@ -68,7 +68,7 @@
                     :data-vv-as="item.label"
                     :name="item.name"
                     :placeholder="item.label"
-                    @change="handleSummaryReport"/>
+                    @change="handleSummaryReport(item.name)"/>
                 </div>
                 <div
                   v-else-if="item.type === 'select'"
@@ -161,13 +161,16 @@ export default {
         this.form.place = '';
       }
     },
-    handleSummaryReport() {
+    handleSummaryReport(name) {
+      if (name === 'summary') {
+        return;
+      }
       this.form.summary = (this.form.brother || 0)
-          + (this.form.sister || 0)
-          + (this.form.baptism || 0)
-          + (this.form.newer || 0)
-          + (this.form.friend || 0)
-          + (this.form.child || 0);
+        + (this.form.sister || 0)
+        + (this.form.baptism || 0)
+        + (this.form.newer || 0)
+        + (this.form.friend || 0)
+        + (this.form.child || 0);
     },
     async handleSave() {
       await this.$validator.validateAll();
