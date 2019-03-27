@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import App from '@/App';
 import router from '@/router';
 import store from '@/store/index';
-// import { sync } from 'vuex-router-sync';
+import { sync } from 'vuex-router-sync';
 import plugins from '@/plugins';
 import VeeValidate, { Validator } from 'vee-validate';
 import zhTW from 'vee-validate/dist/locale/zh_TW';
@@ -26,7 +26,7 @@ Vue.use(VeeValidate);
 Vue.use(VueGoodTablePlugin);
 
 Validator.localize('zh-TW', zhTW);
-// sync(store, router, { moduleName: 'route' });
+sync(store, router, { moduleName: 'route' });
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
