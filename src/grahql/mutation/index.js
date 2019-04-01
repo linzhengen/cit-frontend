@@ -8,7 +8,7 @@ export const createReportMutation = gql`
     $place: String!
     $dateTime: DateTime!
     $summary: Int!
-    $detail: String
+    $detail: Json
   ) {
     createReport(data: {
       type: $type

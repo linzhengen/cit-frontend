@@ -12,8 +12,21 @@
 </template>
 
 <script>
+import { reportListQuery } from '@/grahql/query';
+import moment from 'moment';
+
 export default {
   name: 'ReportList',
+  apollo: {
+    // Query with parameters
+    reportList: {
+      query: reportListQuery,
+      variables: {
+        from: new Date(),
+        to: new Date(),
+      },
+    },
+  },
   data() {
     return {
       columns: [

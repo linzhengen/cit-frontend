@@ -1,9 +1,16 @@
 import gql from 'graphql-tag';
 
 /* eslint-disable import/prefer-default-export */
-export const ReportListQuery = gql`
-  {
-    reports {
+export const reportListQuery = gql`
+  query (
+    $from: DateTime
+    $to: DateTime
+  ) {
+    reports(
+      where: {
+        dateTime_lte: $from
+        dateTime_gte: $to
+      }) {
       ...report
     }
   }

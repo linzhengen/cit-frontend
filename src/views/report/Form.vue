@@ -187,9 +187,9 @@ export default {
           type: this.form.type,
           title: this.form.title,
           place: this.form.place,
-          dateTime: moment(`${this.form.date} ${this.form.time}`, 'YYYY/MM/DD HH:MM').toDate(),
+          dateTime: moment(`${this.form.date} ${this.form.time}`, 'YYYY-MM-DD hh:mm').toDate(),
           summary: this.form.summary,
-          detail: JSON.stringify(this.form),
+          detail: this.form,
         },
       });
     },
