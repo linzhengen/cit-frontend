@@ -13,17 +13,29 @@
 
 <script>
 import { reportListQuery } from '@/grahql/query';
-import moment from 'moment';
+import moment from '@/utils/moment';
 
 export default {
   name: 'ReportList',
   apollo: {
     // Query with parameters
-    reportList: {
+    lastWeekReportList: {
       query: reportListQuery,
       variables: {
-        from: new Date(),
-        to: new Date(),
+        from: moment.ja().subtract(1, 'weeks')
+          .day(1)
+          .toDate(),
+        to: moment.ja().subtract(1, 'weeks')
+          .day(7)
+          .toDate(),
+      },
+    },
+    // Query with parameters
+    thisWeekReportList: {
+      query: reportListQuery,
+      variables: {
+        from: moment.ja().day(1).toDate(),
+        to: moment.ja().day(7).toDate(),
       },
     },
   },
