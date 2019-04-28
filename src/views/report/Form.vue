@@ -31,18 +31,39 @@
                     :placeholder="item.label"
                   />
                 </div>
+                <!--<div-->
+                  <!--v-else-if="item.type === 'date'"-->
+                  <!--class="control">-->
+                  <!--<input-->
+                    <!--type="date"-->
+                    <!--v-validate="item.validate"-->
+                    <!--v-model="form[item.name]"-->
+                    <!--:class="[{'is-danger': errors.has(item.name)}, 'input']"-->
+                    <!--:data-vv-as="item.label"-->
+                    <!--:name="item.name"-->
+                    <!--:placeholder="item.label"-->
+                  <!--/>-->
+                <!--</div>-->
                 <div
                   v-else-if="item.type === 'date'"
                   class="control">
-                  <input
-                    type="date"
-                    v-validate="item.validate"
-                    v-model="form[item.name]"
-                    :class="[{'is-danger': errors.has(item.name)}, 'input']"
-                    :data-vv-as="item.label"
-                    :name="item.name"
-                    :placeholder="item.label"
-                  />
+                  <div
+                    :class="[{'is-danger': errors.has(item.name)}, 'select', 'is-fullwidth']"
+                  >
+                    <select
+                      v-validate="item.validate"
+                      v-model="form[item.name]"
+                      :data-vv-as="item.label"
+                      :name="item.name">
+                      <option disabled value="">請選擇</option>
+                      <option
+                        v-for="(dateName, date) in lastWeekDates"
+                        :key="date"
+                        :value="date">
+                        {{ dateName }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div
                   v-else-if="item.type === 'time'"
@@ -132,7 +153,7 @@ import places from '@/data/places';
 import reportForm from '@/data/reportForm';
 import VueScrollTo from 'vue-scrollto';
 import { createReportMutation } from '@/grahql/mutation';
-import moment from 'moment';
+import moment from '@/utils/moment';
 
 export default {
   name: 'ReportForm',
@@ -153,6 +174,15 @@ export default {
       places,
       reportForm,
     };
+  },
+  computed: {
+    lastWeekDates() {
+      const dates = {};
+      for (let i = 0; i < 7; i += 1) {
+        dates[moment.ja().subtract(i, 'days').format('YYYY-MM-DD')] = moment.ja().subtract(i, 'days').format('YYYY-MM-DD(ddd)');
+      }
+      return dates;
+    },
   },
   methods: {
     handleSelectChange(name) {
@@ -186,7 +216,7 @@ export default {
           type: this.form.type,
           title: this.form.title,
           place: this.form.place,
-          dateTime: moment(`${this.form.date} ${this.form.time}`, 'YYYY-MM-DD hh:mm').toDate(),
+          dateTime: moment.ja(`${this.form.date} ${this.form.time}`, 'YYYY-MM-DD hh:mm').toDate(),
           summary: this.form.summary,
           detail: this.form,
         },

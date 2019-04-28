@@ -11,7 +11,11 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
-
+import * as filters from '@/filters';
+import {
+  Table,
+  TableColumn,
+} from 'element-ui';
 import 'font-awesome/scss/font-awesome.scss';
 import '@/scss/app.scss';
 
@@ -21,9 +25,17 @@ Vue.use(Vuex);
 Vue.use(VueApollo);
 Vue.use(plugins);
 Vue.use(VeeValidate);
+Vue.use(Table);
+Vue.use(TableColumn);
+
+// register global utility filters
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+});
 
 Validator.localize('zh-TW', zhTW);
 sync(store, router, { moduleName: 'route' });
+
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
