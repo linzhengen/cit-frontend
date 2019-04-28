@@ -178,7 +178,6 @@ export default {
         VueScrollTo.scrollTo(`[name=${this.errors.items[0].field}]`, 700);
         return;
       }
-      console.log(this.form);
       await this.$apollo.mutate({
         // Query
         mutation: createReportMutation,

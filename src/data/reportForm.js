@@ -21,8 +21,8 @@ export default [
     type: 'select',
     name: 'place',
     label: '地點',
-    validate: 'required',
     options: [],
+    validate: 'required',
   },
   {
     type: 'date',

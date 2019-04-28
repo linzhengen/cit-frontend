@@ -7,9 +7,10 @@ export const reportListQuery = gql`
     $to: DateTime
   ) {
     reports(
+      orderBy: dateTime_ASC,
       where: {
-        dateTime_lte: $from
-        dateTime_gte: $to
+        dateTime_gte: $from
+        dateTime_lte: $to
       }) {
       ...report
     }
