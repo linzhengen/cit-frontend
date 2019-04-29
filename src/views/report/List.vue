@@ -116,6 +116,12 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      lastWeekReports: [],
+      thisWeekReports: [],
+    };
+  },
 };
 </script>
 
