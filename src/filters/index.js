@@ -9,6 +9,7 @@ export const typeName = (type) => {
   if (typeOption) {
     return typeOption.label;
   }
+
   return '';
 };
 
@@ -19,5 +20,6 @@ export const placeName = (place, type) => {
       return typePlace.label;
     }
   }
+
   return '';
 };
