@@ -36,6 +36,11 @@
             </el-table-column>
             <el-table-column
               prop="detail.summary"
+              label="標題"
+              width="100">
+            </el-table-column>
+            <el-table-column
+              prop="detail.title"
               label="合計"
               width="100">
             </el-table-column>
@@ -121,6 +126,10 @@ export default {
       lastWeekReports: [],
       thisWeekReports: [],
     };
+  },
+  created() {
+    this.$apollo.queries.lastWeekReports.refetch();
+    this.$apollo.queries.thisWeekReports.refetch();
   },
 };
 </script>
