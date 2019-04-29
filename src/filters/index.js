@@ -5,8 +5,9 @@ import places from '@/data/places';
 /* eslint-disable import/prefer-default-export */
 export const typeName = (type) => {
   const typeForm = _.find(reportFrom, data => data.name === 'type');
-  if (type in typeForm.options) {
-    return typeForm.options[type].label;
+  const typeOption = _.find(typeForm.options, data => data.key === parseInt(type, 10));
+  if (typeOption) {
+    return typeOption.label;
   }
   return '';
 };

@@ -15,6 +15,8 @@ import * as filters from '@/filters';
 import {
   Table,
   TableColumn,
+  Loading,
+  Message,
 } from 'element-ui';
 import 'font-awesome/scss/font-awesome.scss';
 import '@/scss/app.scss';
@@ -27,6 +29,11 @@ Vue.use(plugins);
 Vue.use(VeeValidate);
 Vue.use(Table);
 Vue.use(TableColumn);
+Vue.use(Loading);
+
+Vue.use(Loading.directive);
+
+Vue.prototype.$message = Message;
 
 // register global utility filters
 Object.keys(filters).forEach((key) => {
@@ -35,7 +42,6 @@ Object.keys(filters).forEach((key) => {
 
 Validator.localize('zh-TW', zhTW);
 sync(store, router, { moduleName: 'route' });
-
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-loading.fullscreen.lock="$apollo.loading">
     <section
       class="section">
       <h1 class="title">集会人数登録</h1>
@@ -179,7 +179,7 @@ export default {
     lastWeekDates() {
       const dates = {};
       for (let i = 0; i < 7; i += 1) {
-        dates[moment.ja().subtract(i, 'days').format('YYYY-MM-DD')] = moment.ja().subtract(i, 'days').format('YYYY-MM-DD(ddd)');
+        dates[moment().subtract(i, 'days').format('YYYY-MM-DD')] = moment().subtract(i, 'days').format('YYYY-MM-DD(ddd)');
       }
       return dates;
     },
@@ -216,11 +216,16 @@ export default {
           type: this.form.type,
           title: this.form.title,
           place: this.form.place,
-          dateTime: moment.ja(`${this.form.date} ${this.form.time}`, 'YYYY-MM-DD hh:mm').toDate(),
+          dateTime: moment(`${this.form.date} ${this.form.time}`, 'YYYY-MM-DD hh:mm').toDate(),
           summary: this.form.summary,
           detail: this.form,
         },
       });
+      this.$message({
+        message: '送信成功！',
+        type: 'success',
+      });
+      this.$router.push({ name: 'ReportList' });
     },
   },
 };
