@@ -20,7 +20,7 @@ export default [
   {
     type: 'select',
     name: 'place',
-    label: '地點・區分',
+    label: '地點・分類',
     options: [],
     validate: '',
   },
