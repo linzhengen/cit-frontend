@@ -20,9 +20,9 @@ export default [
   {
     type: 'select',
     name: 'place',
-    label: '地點',
+    label: '地點・區分',
     options: [],
-    validate: 'required',
+    validate: '',
   },
   {
     type: 'date',
