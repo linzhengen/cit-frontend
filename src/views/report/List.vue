@@ -35,12 +35,12 @@
               </template>
             </el-table-column>
             <el-table-column
-              prop="detail.summary"
+              prop="detail.title"
               label="標題"
               width="100">
             </el-table-column>
             <el-table-column
-              prop="detail.title"
+              prop="detail.summary"
               label="合計"
               width="100">
             </el-table-column>
