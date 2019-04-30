@@ -57,7 +57,7 @@
                       :name="item.name">
                       <option disabled value="">請選擇</option>
                       <option
-                        v-for="(dateName, date) in lastWeekDates"
+                        v-for="(dateName, date) in pastWeekDates"
                         :key="date"
                         :value="date">
                         {{ dateName }}
@@ -176,9 +176,9 @@ export default {
     };
   },
   computed: {
-    lastWeekDates() {
+    pastWeekDates() {
       const dates = {};
-      for (let i = 0; i < 7; i += 1) {
+      for (let i = 0; i < 14; i += 1) {
         dates[moment().subtract(i, 'days').format('YYYY-MM-DD')] = moment().subtract(i, 'days').format('YYYY-MM-DD(ddd)');
       }
       return dates;
