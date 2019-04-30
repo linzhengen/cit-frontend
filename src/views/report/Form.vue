@@ -186,7 +186,7 @@ export default {
   computed: {
     pastWeekDates() {
       const dates = {};
-      for (let i = 0; i < 14; i += 1) {
+      for (let i = 0; i < 8; i += 1) {
         dates[moment().subtract(i, 'days').format('YYYY-MM-DD')] = moment().subtract(i, 'days').format('YYYY-MM-DD(ddd)');
       }
       return dates;
