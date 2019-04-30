@@ -35,13 +35,13 @@
               </template>
             </el-table-column>
             <el-table-column
-              prop="detail.title"
-              label="標題"
+              prop="detail.summary"
+              label="合計"
               width="100">
             </el-table-column>
             <el-table-column
-              prop="detail.summary"
-              label="合計"
+              prop="detail.title"
+              label="標題"
               width="100">
             </el-table-column>
             <el-table-column
