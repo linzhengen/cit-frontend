@@ -15,6 +15,7 @@ export default {
     { key: '1_13', label: '代々木週五' },
   ],
   2: [
+    { key: '2_0', label: '一般聚會' },
     { key: '2_1', label: '東京上午區' },
     { key: '2_2', label: '東京下午區' },
     { key: '2_3', label: '第三大區' },
@@ -28,6 +29,7 @@ export default {
     { key: '2_11', label: '相調聚會' },
   ],
   3: [
+    { key: '3_0', label: '真理成全' },
     { key: '3_1', label: '成全訓練' },
     { key: '3_2', label: '真理追求' },
   ],

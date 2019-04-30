@@ -16,7 +16,7 @@
             style="width: 100%">
             <el-table-column
               prop="detail.place"
-              label="地點"
+              label="地點・分類"
               width="100">
               <template slot-scope="scope">
                 {{ scope.row.detail.place | placeName(type) }}
@@ -77,6 +77,11 @@
             <el-table-column
               prop="detail.speaker"
               label="申言"
+              width="100">
+            </el-table-column>
+            <el-table-column
+              prop="detail.memo"
+              label="備註"
               width="100">
             </el-table-column>
           </el-table>

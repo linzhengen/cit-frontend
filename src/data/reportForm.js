@@ -22,7 +22,7 @@ export default [
     name: 'place',
     label: '地點・分類',
     options: [],
-    validate: '',
+    validate: 'required',
   },
   {
     type: 'date',
@@ -82,6 +82,12 @@ export default [
     type: 'number',
     name: 'speaker',
     label: '申言',
+    validate: '',
+  },
+  {
+    type: 'text',
+    name: 'memo',
+    label: '備註',
     validate: '',
   },
 ];

@@ -176,6 +176,7 @@ export default {
         friend: null,
         child: null,
         speaker: null,
+        memo: null,
       },
       placeSelect: [],
       places,
