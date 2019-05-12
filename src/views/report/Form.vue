@@ -7,8 +7,8 @@
       <div class="columns">
         <div class="column">
           <div
-            v-for="item in reportForm"
-            :key="item.name"
+            v-for="(item, key) in reportForm"
+            :key="key"
             class="field is-horizontal">
             <div class="field-label is-normal">
               <label class="label">
