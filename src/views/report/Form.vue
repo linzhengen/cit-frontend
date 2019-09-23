@@ -25,6 +25,7 @@
                     type="text"
                     v-validate="item.validate"
                     v-model="form[item.name]"
+                    @input="form[item.name] = $event.target.value"
                     :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     :data-vv-as="item.label"
                     :name="item.name"
@@ -72,6 +73,7 @@
                     type="time"
                     v-validate="item.validate"
                     v-model="form[item.name]"
+                    @input="form[item.name] = $event.target.value"
                     :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     :data-vv-as="item.label"
                     :name="item.name"
@@ -86,6 +88,7 @@
                     :class="[{'is-danger': errors.has(item.name)}, 'input']"
                     v-validate="item.validate"
                     v-model.number="form[item.name]"
+                    @input="form[item.name] = $event.target.value"
                     :data-vv-as="item.label"
                     :name="item.name"
                     :placeholder="item.label"
@@ -203,12 +206,12 @@ export default {
       if (name === 'summary') {
         return;
       }
-      this.form.summary = (this.form.brother || 0)
-        + (this.form.sister || 0)
-        + (this.form.baptism || 0)
-        + (this.form.newer || 0)
-        + (this.form.friend || 0)
-        + (this.form.child || 0);
+      this.form.summary = (parseInt(this.form.brother, 10) || 0)
+        + (parseInt(this.form.sister, 10) || 0)
+        + (parseInt(this.form.baptism, 10) || 0)
+        + (parseInt(this.form.newer, 10) || 0)
+        + (parseInt(this.form.friend, 10) || 0)
+        + (parseInt(this.form.child, 10) || 0);
     },
     async handleSave() {
       await this.$validator.validateAll();

@@ -13,6 +13,7 @@ export default {
     { key: '1_11', label: '田原町' },
     { key: '1_12', label: '早稲阿佐' },
     { key: '1_13', label: '代々木週五' },
+    { key: '1_14', label: '入谷' },
   ],
   2: [
     { key: '2_0', label: '一般聚會' },
